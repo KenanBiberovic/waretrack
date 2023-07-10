@@ -18,6 +18,7 @@ import { collection, addDoc } from "firebase/firestore";
 function Main() {
   const [name, setName] = useState("");
   const [type, setType] = useState("");
+  const [model, setModel] = useState("");
   const [place, setPlace] = useState("");
   const [productionDate, setProductionDate] = useState(0);
   const [quantity, setQuantity] = useState(0);
@@ -29,14 +30,15 @@ function Main() {
       place: place,
       productionDate: productionDate,
       quantity: quantity,
+      model: model,
     });
   };
   return (
     <div style={{ marginBottom: "10px" }}>
       <NavigationBar />
       <Box sx={{ flexDirection: "column", gap: "10px" }}>
-        <Typography variant="h4" color="primary">
-          Efficiently manage your warehouse inventory with ease
+        <Typography variant="h5" color="primary">
+          Add your warehouse product
         </Typography>
         <br />
         <TextField
@@ -46,6 +48,16 @@ function Main() {
           placeholder="Enter name..."
           onChange={(event) => {
             setName(event.target.value);
+          }}
+        />
+        <br />
+        <br />
+        <TextField
+          id="standard-basic"
+          label="Model"
+          variant="outlined"
+          onChange={(event) => {
+            setModel(event.target.value);
           }}
         />
         <br />
@@ -95,6 +107,7 @@ function Main() {
         />
         <br />
         <br />
+
         <Button variant="outlined" onClick={createProduct}>
           Create product
         </Button>

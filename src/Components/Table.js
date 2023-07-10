@@ -9,12 +9,18 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { db } from "./Firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, deleteDoc } from "firebase/firestore";
 
 // ...
 
 export default function BasicTable() {
   const [product, setProduct] = useState([]);
+
+  const deleteProduct = async (id) => {
+    const productDoc = doc(db, "product", id);
+    await deleteDoc(productDoc);
+    window.location.reload();
+  };
 
   useEffect(() => {
     const getProduct = async () => {
@@ -32,6 +38,7 @@ export default function BasicTable() {
         <TableHead>
           <TableRow>
             <TableCell>Name</TableCell>
+            <TableCell align="right">Model</TableCell>
             <TableCell align="right">Type</TableCell>
             <TableCell align="right">Place</TableCell>
             <TableCell align="right">Production Date</TableCell>
@@ -47,12 +54,20 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
+              <TableCell align="right">{row.model}</TableCell>
               <TableCell align="right">{row.type}</TableCell>
               <TableCell align="right">{row.place}</TableCell>
               <TableCell align="right">{row.productionDate}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
-              <Button variant="text">Edit</Button>{" "}
-              <Button variant="outlined">Delete</Button>
+              <Button variant="text">Edit</Button>
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  deleteProduct(row.id);
+                }}
+              >
+                Delete
+              </Button>
             </TableRow>
           ))}
         </TableBody>

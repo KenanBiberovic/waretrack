@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavigationBar from "./NavigationBar";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
@@ -25,6 +25,8 @@ const loginSchema = yup.object({
     .max(50, "Sifra mora da ima najvise 50 karaktera"),
 });
 function Login() {
+  const [loginMail, setLoginMail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const navigate = useNavigate();
   const submitForm = () => {};
   return (

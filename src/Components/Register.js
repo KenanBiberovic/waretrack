@@ -1,30 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import "../Components/UI/Register.css";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import NavigationBar from "./NavigationBar";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./Firebase-config";
 
 const initialValues = {
   email: "",
   password: "",
-  fullName: "",
 };
 
 const Register = () => {
+  const registration = async () => {
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  //
   const submitForm = (values) => {};
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
 
   return (
     <div className="register-wrapper">
       <NavigationBar />
       <Box>
-        <Typography variant="h3" color="primary" gutterTop>
+        <Typography variant="h3" color="primary">
           Register for full environment
         </Typography>
       </Box>
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          submitForm(values);
+          console.log(values);
         }}
       >
         {({
@@ -33,33 +49,18 @@ const Register = () => {
           touched,
           handleBlur,
           handleChange,
-          handleSubmit,
+          handleSubmit = registration,
         }) => (
           <div>
-            <div>
-              <TextField
-                variant="outlined"
-                label="Full Name"
-                type="text"
-                name="fullName"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.fullName}
-              />
-
-              <p className="error-message">
-                {errors.fullName && touched.fullName && errors.fullName}
-              </p>
-            </div>
             <div>
               <TextField
                 variant="outlined"
                 label="Email"
                 type="email"
                 name="email"
-                onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.email}
+                onChange={handleChange}
               />
               <p className="error-message">
                 {errors.email && touched.email && errors.email}
