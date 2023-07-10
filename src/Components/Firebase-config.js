@@ -3,7 +3,7 @@ import { getFirestore } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDs-j5HOTDvekRIwmUSz1EFvln7mKaRnkU",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "waretrack-39c38.firebaseapp.com",
   projectId: "waretrack-39c38",
   storageBucket: "waretrack-39c38.appspot.com",
