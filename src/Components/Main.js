@@ -49,6 +49,7 @@ function Main() {
           }}
         />
         <br />
+        <br />
         <TextField
           id="standard-basic"
           label="Type"
@@ -59,6 +60,7 @@ function Main() {
           }}
         />
         <br />
+        <br />
         <TextField
           id="standard-basic"
           label="Place"
@@ -68,6 +70,7 @@ function Main() {
             setPlace(event.target.value);
           }}
         />
+        <br />
         <br />
         <TextField
           id="standard-basic"
@@ -80,6 +83,7 @@ function Main() {
           }}
         />
         <br />
+        <br />
         <TextField
           id="standard-basic"
           label="Quantity"
@@ -89,6 +93,7 @@ function Main() {
             setQuantity(event.target.value);
           }}
         />
+        <br />
         <br />
         <Button variant="outlined" onClick={createProduct}>
           Create product
