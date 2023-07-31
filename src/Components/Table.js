@@ -9,7 +9,14 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
 import { db } from "./Firebase-config";
-import { collection, doc, getDocs, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  deleteDoc,
+  getDoc,
+} from "firebase/firestore";
+import { getQuoteById } from "./Firebase-config";
 
 // ...
 
@@ -20,6 +27,26 @@ export default function BasicTable() {
     const productDoc = doc(db, "product", id);
     await deleteDoc(productDoc);
     window.location.reload();
+  };
+  //
+  // useEffect(() => {
+  //   const getQuoteById = async (id) => {
+  //     const docRef = doc(db, "quotes", id);
+  //     const docSnap = await getDoc(docRef);
+  //     const data = docSnap.data();
+
+  //     return { ...data, id: id };
+  //   };
+
+  //   getQuoteById();
+  // }, []);
+
+  const getQuoteById = async (id) => {
+    const docRef = doc(db, "quotes", id);
+    const docSnap = await getDoc(docRef);
+    const data = docSnap.data();
+
+    return { ...data, id: id };
   };
 
   useEffect(() => {
@@ -59,7 +86,9 @@ export default function BasicTable() {
               <TableCell align="right">{row.place}</TableCell>
               <TableCell align="right">{row.productionDate}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
-              <Button variant="text">Edit</Button>
+              <Button variant="text" onClick={getQuoteById()}>
+                Edit
+              </Button>
               <Button
                 variant="outlined"
                 onClick={() => {

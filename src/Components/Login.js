@@ -11,7 +11,12 @@ import {
   useTheme,
   Switch,
 } from "@mui/material";
+//
 
+//
+const register = async () => {};
+const login = async () => {};
+const logout = async () => {};
 const loginSchema = yup.object({
   email: yup
     .string()
@@ -75,7 +80,6 @@ function Login() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
-                  // className="login-input"
                 />
                 <Typography variant="body1" color="error">
                   {errors.password && touched.password && errors.password}

@@ -15,9 +15,9 @@ function NavigationBar() {
         <li>
           <a href="/login">Login</a>
         </li>
-        <li>
+        {/* <li>
           <a href="/register">Register</a>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
